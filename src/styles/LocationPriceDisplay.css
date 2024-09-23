@@ -1,0 +1,36 @@
+.location-price-display {
+  margin: 20px;
+  padding: 20px;
+}
+
+.recipe-block {
+  background-color: #1a1a1a;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.materials-section,
+.total-craft-cost-section,
+.item-price-section,
+.potential-profit-section {
+  margin-bottom: 15px;
+}
+
+.materials-section {
+  background-color: #222;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.item-price-section input {
+  padding: 5px;
+  width: 100%;
+  max-width: 150px;
+  margin-top: 5px;
+}
+
+.potential-profit-section {
+  font-weight: bold;
+  color: green;
+}
