@@ -137,22 +137,36 @@ h2 {
   outline: none;
 }
 
-/* Filters */
+/* Filters Container */
 .filters {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Align items to the top */
+  flex-wrap: wrap;
   gap: 10px;
   padding: 20px;
 }
 
+/* Media query for screens smaller than 768px */
 @media screen and (max-width: 768px) {
   .filters {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
     padding: 10px;
+  }
+
+  .filters select,
+  .filters input,
+  .filters button {
+    flex: 1 1 48%; /* Each filter item takes 48% of the width */
+    margin: 5px; /* Margin between items */
+    padding: 10px;
+    max-width: 100%;
   }
 }
 
+/* Filters styling for inputs and selects */
 .filters select,
 .filters input {
   padding: 8px;
@@ -161,12 +175,49 @@ h2 {
   background-color: #2b2e33;
   color: #fff;
   height: 38px;
+  width: 100%; /* Ensure full width */
+  max-width: 100%;
+  flex: 1; /* Allow flexibility */
 }
 
 .filters select:focus,
 .filters input:focus {
   outline: none;
   border-color: #67b7f7;
+}
+
+.filters button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1 1 48%; /* Buttons take 48% width on mobile */
+}
+
+.filters button:hover {
+  background-color: #0056b3;
+}
+
+/* Ensure consistent button sizes for Search and Filter buttons */
+.filters .search-button,
+.filters .filter-buttons {
+  flex: 1 1 48%; /* Ensure buttons are 48% wide on mobile */
+  margin: 5px;
+}
+
+/* Align the favorites and clear filters buttons horizontally */
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.filter-buttons button {
+  width: 48%;
 }
 
 /* Pagination */
@@ -370,14 +421,20 @@ h2 {
 /* Grid Layout for Materials */
 .materials-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Flexible columns */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Flexible columns */
   gap: 20px;
   margin-bottom: 20px;
 }
 
 @media screen and (max-width: 768px) {
   .materials-section {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust for smaller screens */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(150px, 1fr)
+    ); /* Adjust for smaller screens */
     gap: 15px;
   }
 }
