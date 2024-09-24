@@ -1,3 +1,5 @@
+// src/pages/AuctionHouse.js
+
 import React, { useState, useEffect } from "react";
 import Filters from "../components/Filters";
 import ItemList from "../components/ItemList";
@@ -6,9 +8,9 @@ import useFavorites from "../hooks/useFavorites";
 import { useNavigate } from "react-router-dom";
 
 export default function AuctionHouse() {
-  const [items, setItems] = useState([]); // All items
-  const [filteredItems, setFilteredItems] = useState([]); // Filtered items
-  const [categories, setCategories] = useState({}); // Store categories and subcategories
+  const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [categories, setCategories] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const { favorites, toggleFavorite } = useFavorites();
@@ -17,7 +19,7 @@ export default function AuctionHouse() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchItems(); // Fetch items once when the component mounts
+    fetchItems();
   }, []);
 
   const fetchItems = async () => {
@@ -43,7 +45,6 @@ export default function AuctionHouse() {
         displayTier: `${item.tier}.0`,
       }));
 
-      // Dynamically extract categories and subcategories
       const extractedCategories = {};
       enrichedItems.forEach((item) => {
         if (!extractedCategories[item.shopcategory]) {
@@ -55,8 +56,8 @@ export default function AuctionHouse() {
       });
 
       setItems(enrichedItems);
-      setFilteredItems(enrichedItems); // Initialize filtered items
-      setCategories(extractedCategories); // Set the categories dynamically
+      setFilteredItems(enrichedItems);
+      setCategories(extractedCategories);
     } catch (error) {
       console.error("Error fetching items:", error);
     }
@@ -65,33 +66,28 @@ export default function AuctionHouse() {
   const applyFilters = (newFilters) => {
     let filtered = items;
 
-    // Apply search filter
     if (newFilters.search) {
       filtered = filtered.filter((item) =>
         item.displayName.toLowerCase().includes(newFilters.search.toLowerCase())
       );
     }
 
-    // Apply category filter
     if (newFilters.category !== "All") {
       filtered = filtered.filter(
         (item) => item.shopcategory === newFilters.category
       );
     }
 
-    // Apply subcategory filter
     if (newFilters.subcategory !== "All") {
       filtered = filtered.filter(
         (item) => item.shopsubcategory1 === newFilters.subcategory
       );
     }
 
-    // Apply tier filter
     if (newFilters.tier !== "All") {
       filtered = filtered.filter((item) => item.tier === newFilters.tier);
     }
 
-    // Apply enchantment filter
     if (newFilters.enchantment !== "All") {
       const enchantmentSuffix = `@${newFilters.enchantment}`;
       filtered = filtered.map((item) => ({
@@ -101,7 +97,6 @@ export default function AuctionHouse() {
         displayTier: `${item.tier}.${newFilters.enchantment}`,
       }));
     } else {
-      // Reset displayTier if no enchantment is applied
       filtered = filtered.map((item) => ({
         ...item,
         displayTier: `${item.tier}.0`,
@@ -109,15 +104,14 @@ export default function AuctionHouse() {
     }
 
     setFilteredItems(filtered);
-    setCurrentPage(1); // Reset to the first page
-    setRefreshKey((prevKey) => prevKey + 1); // Force item list refresh
+    setCurrentPage(1);
+    setRefreshKey((prevKey) => prevKey + 1);
   };
 
   const handleClearFilters = () => {
-    // Reset filters and items
     setFilteredItems(items);
-    setCurrentPage(1); // Reset pagination to the first page
-    setRefreshKey((prevKey) => prevKey + 1); // Force refresh
+    setCurrentPage(1);
+    setRefreshKey((prevKey) => prevKey + 1);
   };
 
   const handleItemClick = (item) => {
@@ -130,15 +124,15 @@ export default function AuctionHouse() {
 
   const handleShowFavorites = () => {
     if (showFavorites) {
-      setFilteredItems(items); // Show all items when favorites are hidden
+      setFilteredItems(items);
     } else {
       setFilteredItems(
         items.filter((item) => favorites.includes(item.uniquename))
       );
     }
-    setShowFavorites(!showFavorites); // Toggle favorite view
-    setCurrentPage(1); // Reset to the first page after toggling favorites
-    setRefreshKey((prevKey) => prevKey + 1); // Force refresh
+    setShowFavorites(!showFavorites);
+    setCurrentPage(1);
+    setRefreshKey((prevKey) => prevKey + 1);
   };
 
   return (
@@ -146,19 +140,30 @@ export default function AuctionHouse() {
       <Filters
         onApplyFilters={applyFilters}
         onClear={handleClearFilters}
-        onShowFavorites={handleShowFavorites}
-        categories={categories} // Pass categories to Filters dynamically
+        categories={categories}
       />
-      <h2>
-        Showing{" "}
-        {
-          filteredItems.slice(
-            (currentPage - 1) * itemsPerPage,
-            currentPage * itemsPerPage
-          ).length
-        }{" "}
-        out of {filteredItems.length} results
-      </h2>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h2>
+          Showing{" "}
+          {
+            filteredItems.slice(
+              (currentPage - 1) * itemsPerPage,
+              currentPage * itemsPerPage
+            ).length
+          }{" "}
+          out of {filteredItems.length} results
+        </h2>
+        <button onClick={handleShowFavorites} className="show-favorites-btn">
+          {showFavorites ? "Show All Items" : "Show Favorites"}
+        </button>
+      </div>
+
       <ItemList
         key={refreshKey}
         items={filteredItems.slice(

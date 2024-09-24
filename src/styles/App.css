@@ -136,37 +136,80 @@ h2 {
 .favorite-button:focus {
   outline: none;
 }
-
-/* Filters */
+/* Filters Container */
 .filters {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column; /* Stack rows */
+  gap: 20px;
+  width: 100%;
   padding: 20px;
+  box-sizing: border-box; /* Ensure padding is considered in width calculations */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-@media screen and (max-width: 768px) {
-  .filters {
-    flex-direction: column;
-    padding: 10px;
-  }
+/* First row: search and dropdowns */
+.filter-inputs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.filters select,
-.filters input {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #444;
-  background-color: #2b2e33;
+.filter-inputs input,
+.filter-inputs select {
+  flex: 1 1 calc(16.66% - 10px); /* Each input takes ~16.66% of the width */
+  margin: 5px;
+  padding: 10px;
+  max-width: 100%;
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+/* Second row: buttons */
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filter-buttons button {
+  flex: 1;
+  padding: 10px;
+  background-color: #007bff;
   color: #fff;
-  height: 38px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
-.filters select:focus,
-.filters input:focus {
-  outline: none;
-  border-color: #67b7f7;
+.filter-buttons button:hover {
+  background-color: #0056b3;
+}
+
+/* Media query for screens smaller than 768px */
+@media screen and (max-width: 768px) {
+  .filter-inputs {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-inputs input,
+  .filter-inputs select {
+    flex: 1 1 100%; /* Full width on mobile */
+  }
+
+  .filter-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .filter-buttons button {
+    width: 100%;
+  }
 }
 
 /* Pagination */
@@ -370,14 +413,20 @@ h2 {
 /* Grid Layout for Materials */
 .materials-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Flexible columns */
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Flexible columns */
   gap: 20px;
   margin-bottom: 20px;
 }
 
 @media screen and (max-width: 768px) {
   .materials-section {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust for smaller screens */
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(150px, 1fr)
+    ); /* Adjust for smaller screens */
     gap: 15px;
   }
 }
@@ -578,4 +627,17 @@ hr.divider {
   .fetch-prices-btn {
     font-size: 1rem;
   }
+}
+.show-favorites-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.show-favorites-btn:hover {
+  background-color: #0056b3;
 }
