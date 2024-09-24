@@ -21,6 +21,32 @@ h2 {
   justify-content: center;
 }
 
+@media screen and (max-width: 1200px) {
+  .item-container {
+    grid-template-columns: repeat(4, 1fr); /* Adjust to 4 items */
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .item-container {
+    grid-template-columns: repeat(3, 1fr); /* Adjust to 3 items */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .item-container {
+    grid-template-columns: repeat(2, 1fr); /* Adjust to 2 items */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .item-container {
+    grid-template-columns: 1fr; /* 1 item per row */
+    gap: 15px;
+  }
+}
+
+/* Item Card */
 .item {
   background-color: #2b2e33;
   padding: 20px;
@@ -44,6 +70,13 @@ h2 {
   margin: 0 auto;
 }
 
+@media screen and (max-width: 480px) {
+  .item img {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 .item-title {
   color: #67b7f7;
   font-weight: bold;
@@ -53,6 +86,12 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 480px) {
+  .item-title {
+    font-size: 14px;
+  }
 }
 
 .item-tier {
@@ -105,6 +144,13 @@ h2 {
   align-items: center;
   gap: 10px;
   padding: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    padding: 10px;
+  }
 }
 
 .filters select,
@@ -168,7 +214,7 @@ h2 {
 
 /* Item Details */
 .item-details-container {
-  max-width: 1300px; /* Updated width */
+  max-width: 1300px;
   margin: 50px auto;
   display: flex;
   flex-direction: column;
@@ -184,6 +230,12 @@ h2 {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .item-details-box {
+    flex-direction: column;
+  }
 }
 
 .item-details-left {
@@ -202,6 +254,13 @@ h2 {
   border: 3px solid #67b7f7;
 }
 
+@media screen and (max-width: 768px) {
+  .item-image {
+    width: 150px;
+    height: 150px;
+  }
+}
+
 .item-details-right {
   flex: 2;
   padding: 20px;
@@ -211,6 +270,12 @@ h2 {
   font-size: 2rem;
   color: #67b7f7;
   margin-bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .item-name {
+    font-size: 1.5rem;
+  }
 }
 
 /* Fetch Prices Button */
@@ -229,6 +294,14 @@ h2 {
   background-color: #0056b3;
 }
 
+@media screen and (max-width: 768px) {
+  .fetch-prices-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+}
+
 /* Location Price Section */
 .location-prices-section {
   background-color: #2b2e33;
@@ -240,6 +313,12 @@ h2 {
   width: 100%;
 }
 
+@media screen and (max-width: 768px) {
+  .location-prices-section {
+    padding: 20px;
+  }
+}
+
 /* Recipe and Location Price Display */
 .location-price-display {
   background-color: #2e2e2e;
@@ -249,6 +328,12 @@ h2 {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   color: #fff;
   font-family: "Arial", sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  .location-price-display {
+    padding: 20px;
+  }
 }
 
 /* Recipe Block */
@@ -271,15 +356,30 @@ h2 {
   color: #67b7f7;
 }
 
+@media screen and (max-width: 768px) {
+  .recipe-block {
+    padding: 15px;
+    margin-bottom: 30px;
+  }
+
+  .recipe-block h4 {
+    font-size: 1.3rem;
+  }
+}
+
 /* Grid Layout for Materials */
 .materials-section {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(200px, 1fr)
-  ); /* Flexible columns */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Flexible columns */
   gap: 20px;
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .materials-section {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust for smaller screens */
+    gap: 15px;
+  }
 }
 
 .craft-material {
@@ -305,13 +405,24 @@ h2 {
   margin-right: 15px;
 }
 
+@media screen and (max-width: 768px) {
+  .craft-material {
+    padding: 12px;
+  }
+
+  .material-image {
+    width: 50px;
+    height: 50px;
+  }
+}
+
 /* Material Details */
 .material-details {
   flex-grow: 1;
   display: flex;
-  flex-direction: row; /* Changed from row to column to align vertically */
-  justify-content: center; /* Centers content vertically (because of column layout) */
-  align-items: center; /* Centers content horizontally */
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .material-details p {
@@ -319,7 +430,6 @@ h2 {
   font-size: 1.2rem;
   font-weight: bold;
   color: #ffffff;
-  /* Removed margin-top to avoid pushing the text down */
 }
 
 .material-details span {
@@ -346,6 +456,18 @@ h2 {
   color: #b3b3b3;
 }
 
+@media screen and (max-width: 768px) {
+  .material-details p,
+  .material-total p {
+    font-size: 1rem;
+  }
+
+  .material-details span,
+  .material-total span {
+    font-size: 0.8rem;
+  }
+}
+
 /* Total Craft Cost Section */
 .total-craft-cost-section,
 .item-price-section,
@@ -355,6 +477,15 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .total-craft-cost-section,
+  .item-price-section,
+  .potential-profit-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 label {
@@ -373,6 +504,12 @@ input[type="number"] {
 
 input[type="number"]:focus {
   border-color: #67b7f7;
+}
+
+@media screen and (max-width: 768px) {
+  input[type="number"] {
+    width: 100%;
+  }
 }
 
 hr.divider {
@@ -396,7 +533,14 @@ hr.divider {
   background-color: #0056b3;
 }
 
-/* Responsive */
+@media screen and (max-width: 768px) {
+  .fetch-prices-btn {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Responsive Adjustments */
 @media screen and (max-width: 768px) {
   .recipe-block {
     padding: 15px;
@@ -422,6 +566,16 @@ hr.divider {
   .fetch-prices-btn {
     width: 100%;
     padding: 10px;
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .pagination-container {
+    margin-top: 10px;
+  }
+
+  .fetch-prices-btn {
     font-size: 1rem;
   }
 }
