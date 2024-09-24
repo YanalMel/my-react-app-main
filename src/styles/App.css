@@ -136,80 +136,71 @@ h2 {
 .favorite-button:focus {
   outline: none;
 }
-/* Filters Container */
+
+/* Filters */
 .filters {
   display: flex;
-  flex-direction: column; /* Stack rows */
-  gap: 20px;
-  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   padding: 20px;
-  box-sizing: border-box; /* Ensure padding is considered in width calculations */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-/* First row: search and dropdowns */
-.filter-inputs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 10px;
-  width: 100%;
-  box-sizing: border-box;
+@media screen and (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+    padding: 10px;
+  }
 }
 
-.filter-inputs input,
-.filter-inputs select {
-  flex: 1 1 calc(16.66% - 10px); /* Each input takes ~16.66% of the width */
-  margin: 5px;
-  padding: 10px;
-  max-width: 100%;
-  box-sizing: border-box; /* Include padding in width calculation */
+.filters select,
+.filters input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: #2b2e33;
+  color: #fff;
+  height: 38px;
 }
 
-/* Second row: buttons */
-.filter-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  width: 100%;
-  box-sizing: border-box;
+.filters select:focus,
+.filters input:focus {
+  outline: none;
+  border-color: #67b7f7;
 }
 
-.filter-buttons button {
-  flex: 1;
-  padding: 10px;
+.filters button {
+  padding: 10px 15px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  box-sizing: border-box;
+  flex: 1 1 48%; /* Buttons take 48% width on mobile */
 }
 
-.filter-buttons button:hover {
+.filters button:hover {
   background-color: #0056b3;
 }
 
-/* Media query for screens smaller than 768px */
-@media screen and (max-width: 768px) {
-  .filter-inputs {
-    flex-direction: column;
-    gap: 10px;
-  }
+/* Ensure consistent button sizes for Search and Filter buttons */
+.filters .search-button,
+.filters .filter-buttons {
+  flex: 1 1 48%; /* Ensure buttons are 48% wide on mobile */
+  margin: 5px;
+}
 
-  .filter-inputs input,
-  .filter-inputs select {
-    flex: 1 1 100%; /* Full width on mobile */
-  }
+/* Align the favorites and clear filters buttons horizontally */
+.filter-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
 
-  .filter-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .filter-buttons button {
-    width: 100%;
-  }
+.filter-buttons button {
+  width: 48%;
 }
 
 /* Pagination */
